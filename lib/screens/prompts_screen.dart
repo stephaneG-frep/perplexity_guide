@@ -129,9 +129,15 @@ class _PromptsScreenState extends State<PromptsScreen> {
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.all(12),
-            itemCount: filtered.length,
+            itemCount: filtered.length + 1,
             itemBuilder: (context, i) {
-              final cat = filtered[i];
+              if (i == 0) {
+                return const Padding(
+                  padding: EdgeInsets.only(bottom: 12),
+                  child: _PromptsInfoCard(),
+                );
+              }
+              final cat = filtered[i - 1];
               final colorIndex = _categories.indexOf(cat);
               final color = context.palette[colorIndex % context.palette.length];
               return Column(
@@ -258,4 +264,84 @@ class _Prompt {
   final String title;
   final String text;
   const _Prompt(this.title, this.text);
+}
+
+class _PromptsInfoCard extends StatelessWidget {
+  const _PromptsInfoCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final tips = [
+      (Icons.center_focus_strong, 'Soyez précis et contextuel',
+          'Décrivez votre rôle, le contexte et le format souhaité. Ex : "En tant que dev Flutter, explique X pour un débutant en 5 points."'),
+      (Icons.format_list_bulleted, 'Utilisez des placeholders',
+          'Les prompts avec [TEXTE ICI] sont des templates réutilisables. Remplacez les crochets par votre contenu avant d\'envoyer.'),
+      (Icons.send, 'Envoyez directement au Chat',
+          'Le bouton "Envoyer au Chat" transfère le prompt dans l\'écran Chat Perplexity pour tester immédiatement avec l\'API.'),
+      (Icons.repeat, 'Itérez et affinez',
+          'Un bon prompt est rarement parfait du premier coup. Testez, observez la réponse, ajustez le niveau de détail ou le ton.'),
+    ];
+
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: context.tipBg,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: context.tipBorder),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  color: context.accentLight.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(Icons.auto_awesome, color: context.accentLight, size: 18),
+              ),
+              const SizedBox(width: 10),
+              Text('Comment faire un bon prompt ?',
+                  style: TextStyle(
+                      color: context.accentLight,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14)),
+            ],
+          ),
+          const SizedBox(height: 12),
+          ...tips.map((tip) => Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(tip.$1, color: context.accentMid, size: 16),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(tip.$2,
+                              style: TextStyle(
+                                  color: context.onSurface,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12)),
+                          const SizedBox(height: 2),
+                          Text(tip.$3,
+                              style: TextStyle(
+                                  color: context.onSurface.withValues(alpha: 0.65),
+                                  fontSize: 11,
+                                  height: 1.4)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )),
+        ],
+      ),
+    );
+  }
 }
