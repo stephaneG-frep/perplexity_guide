@@ -7,6 +7,7 @@ import 'screens/prompts_screen.dart';
 import 'screens/features_screen.dart';
 import 'screens/chat_screen.dart';
 import 'screens/playground_screen.dart';
+import 'screens/splash_screen.dart';
 
 class AppThemes {
   static ThemeData get darkTeal => ThemeData(
@@ -140,7 +141,7 @@ class PerplexityGuideApp extends StatelessWidget {
           title: 'Perplexity Guide',
           debugShowCheckedModeBanner: false,
           theme: theme == AppTheme.darkTeal ? AppThemes.darkTeal : AppThemes.lightGrey,
-          home: const MainScaffold(),
+          home: const SplashScreen(),
         );
       },
     );
