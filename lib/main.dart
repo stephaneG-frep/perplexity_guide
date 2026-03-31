@@ -7,6 +7,10 @@ import 'screens/prompts_screen.dart';
 import 'screens/features_screen.dart';
 import 'screens/chat_screen.dart';
 import 'screens/playground_screen.dart';
+import 'screens/sonar_screen.dart';
+import 'screens/apps_screen.dart';
+import 'screens/quiz_screen.dart';
+import 'screens/ai_agents_screen.dart';
 import 'screens/splash_screen.dart';
 
 class AppThemes {
@@ -100,6 +104,10 @@ class ThemeConfig {
       NavItem(icon: Icons.star_outline,          label: 'Fonctionnalités',    color: Color(0xFF1B9E78)),
       NavItem(icon: Icons.chat_bubble_outline,   label: 'Chat Perplexity',    color: Color(0xFF20D9A0)),
       NavItem(icon: Icons.science_outlined,      label: 'Playground',         color: Color(0xFF1B9E78)),
+      NavItem(icon: Icons.radar_outlined,        label: 'Sonar & Focus',      color: Color(0xFF20D9A0)),
+      NavItem(icon: Icons.apps_outlined,         label: 'Applications',       color: Color(0xFF1B9E78)),
+      NavItem(icon: Icons.quiz_outlined,         label: 'Quiz',               color: Color(0xFF17C490)),
+      NavItem(icon: Icons.hub_outlined,           label: 'IA & Agents',        color: Color(0xFF20D9A0)),
     ],
   );
 
@@ -121,6 +129,10 @@ class ThemeConfig {
       NavItem(icon: Icons.star_outline,          label: 'Fonctionnalités',    color: Color(0xFF0F7060)),
       NavItem(icon: Icons.chat_bubble_outline,   label: 'Chat Perplexity',    color: Color(0xFF0D9E80)),
       NavItem(icon: Icons.science_outlined,      label: 'Playground',         color: Color(0xFF0F7060)),
+      NavItem(icon: Icons.radar_outlined,        label: 'Sonar & Focus',      color: Color(0xFF0D9E80)),
+      NavItem(icon: Icons.apps_outlined,         label: 'Applications',       color: Color(0xFF0F7060)),
+      NavItem(icon: Icons.quiz_outlined,         label: 'Quiz',               color: Color(0xFF159E84)),
+      NavItem(icon: Icons.hub_outlined,           label: 'IA & Agents',        color: Color(0xFF0F7060)),
     ],
   );
 }
@@ -165,6 +177,10 @@ class _MainScaffoldState extends State<MainScaffold> {
     FeaturesScreen(),
     ChatScreen(),
     PlaygroundScreen(),
+    SonarScreen(),
+    AppsScreen(),
+    QuizScreen(),
+    AiAgentsScreen(),
   ];
 
   static const _titles = [
@@ -175,6 +191,10 @@ class _MainScaffoldState extends State<MainScaffold> {
     'Fonctionnalités',
     'Chat Perplexity',
     'Playground',
+    'Sonar & Focus',
+    'Applications',
+    'Quiz',
+    'IA & Agents',
   ];
 
   ThemeConfig get _cfg =>
@@ -262,14 +282,14 @@ class _MainScaffoldState extends State<MainScaffold> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(12),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.asset(
+                        'assets/images/mon_logo.jpeg',
+                        width: 110,
+                        height: 170,
+                        fit: BoxFit.cover,
                       ),
-                      child: const Icon(Icons.search, color: Colors.white, size: 28),
                     ),
                     const SizedBox(height: 12),
                     const Text('Perplexity Guide',
